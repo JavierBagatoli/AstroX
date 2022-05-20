@@ -1,3 +1,4 @@
+import Pagina from "./Pagina"
 //Codigo por Javier Bagatoli, fecha de creacion 18/05/2022
 const numeroDia = new Date().getDay();
 const dias = [
@@ -17,6 +18,7 @@ if (numeroDia == 6 || numeroDia == 7){
     tituloDia.classList.add("diaNoLaboral")
 }
 
+let pagina = new Pagina("hola","como","estas?")
 //Objetos
 let idPersona = 0;
 const persona = [{
