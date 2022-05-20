@@ -1,13 +1,13 @@
 //Codigo por Javier Bagatoli, fecha de creacion 18/05/2022
 const numeroDia = new Date().getDay();
 const dias = [
-    'domingo',
-    'lunes',
-    'martes',
-    'miércoles',
-    'jueves',
-    'viernes',
-    'sábado',
+    'Domingo',
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
   ];
 
 const tituloDia = document.querySelector(".titulo-dia")
@@ -22,7 +22,7 @@ let idPersona = 0;
 const persona = [{
     nombre : "Javier",
     edad : 22,
-    puesto : "ingeniero",
+    puesto : "Ingeniero",
     entorno : [
         "https://calendar.google.com/calendar/u/0/r",
         "http://localhost:8080/api/v1/Empleados",
@@ -91,10 +91,10 @@ container.innerHTML += `
 <button onclick="abrirEntorno()"
      id="botonAmbito"
       class="boton-ambito-trabajo">
-      🚀Ambito de trabajo🚀
+      🚀Ámbito de trabajo🚀
     </button>
 <article class="articulo">
-    <h1>Tareas conlcuidas</h1>
+    <h1>Tareas concluidas</h1>
     <div>
         ${tareasConcluidas}
     </div>
@@ -181,10 +181,10 @@ function actualizarListas(){
     <button onclick="abrirEntorno()"
      id="botonAmbito"
       class="boton-ambito-trabajo">
-      🚀Ambito de trabajo🚀
+      🚀Ámbito de trabajo🚀
     </button>
     <article class="articulo">
-        <h1>Tareas conlcuidas</h1>
+        <h1>Tareas concluidas</h1>
         <div>
             ${tareasConcluidas}
         </div>
