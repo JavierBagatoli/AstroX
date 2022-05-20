@@ -1,3 +1,4 @@
+//Codigo por Javier Bagatoli, fecha de creacion 18/05/2022
 const numeroDia = new Date().getDay();
 const dias = [
     'domingo',
@@ -17,7 +18,7 @@ if (numeroDia == 6 || numeroDia == 7){
 }
 
 //Objetos
-const idPersona = 0;
+let idPersona = 0;
 const persona = [{
     nombre : "Javier",
     edad : 22,
@@ -39,9 +40,7 @@ const persona = [{
     edad : 21,
     puesto : "Asistente",
     entorno : [
-        "https://calendar.google.com/calendar/u/0/r",
-        "http://localhost:8080/api/v1/Empleados",
-        "https://www.youtube.com/watch?v=xOinGb2MZSk&t=24137s"
+        "https://www.google.com"
     ],
     tareas : [
         "Caminar", "Limpieza", "Revision de calculos"
@@ -64,11 +63,14 @@ function abrirEntorno(){
 const nav = document.querySelector(".estilo-nav")
 
 nav.innerHTML += `
-<h2>Como estas?</h2>
-<div class="grid-item">
+<div class="grid-item-1">
+    <a href="./index.html"><h1>Inicio</h1></a>
+    <a><h2 id="cambiarUsuario">Cambiar usuario</h2></a>
+</div>
+<div class="grid-item-usuario">
     <ul >
         <li>
-            <h3>${persona[idPersona].puesto} ${persona[idPersona].nombre} </h3>
+            <h3 id="datosPerfil">${persona[idPersona].puesto} ${persona[idPersona].nombre} </h3>
         </li>
     </ul>
 </div>
@@ -187,4 +189,23 @@ function actualizarListas(){
             ${tareasConcluidas}
         </div>
     </article>`
+}
+
+//Cambiar Usuario -> creacion del codigo 19/05/2022
+const cambiarUsuario = document.getElementById("cambiarUsuario")
+cambiarUsuario.addEventListener("click", () => cambiarAUsuario())
+
+function cambiarAUsuario(){
+    if (idPersona == 0){
+        idPersona = 1
+    }else{
+        idPersona = 0;
+    }
+    actualizarListas()
+    actualizarDatosUsuario()
+}
+
+function actualizarDatosUsuario(){
+    let perfilNav = document.getElementById("datosPerfil")
+    perfilNav.innerHTML = `${persona[idPersona].puesto} ${persona[idPersona].nombre}`
 }

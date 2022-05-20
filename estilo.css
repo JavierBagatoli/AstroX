@@ -10,7 +10,7 @@ body{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+    grid-auto-rows: 60px;
     max-height: 60px;
     color:black;
     background: linear-gradient(90deg, rgb(130 89 94) 0%, rgb(148 45 59) 35%, rgb(101 28 39) 100%);
@@ -20,11 +20,19 @@ body{
     margin-left: 10px;
 }
 
-.estilo-nav .grid-item{
+.estilo-nav .grid-item-usuario{
     text-align: right;
     margin-right: 5%;
     grid-column: 3;
     grid-row: 1;
+}
+.estilo-nav .grid-item-1{
+    text-align: left;
+    margin-right: 5%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(190px, auto));
+    grid-gap: 10px;
+    grid-auto-rows: 60px;
 }
 
 li{color: white;
@@ -70,6 +78,7 @@ li{color: white;
     border-style: solid;
     border-color: white;
     border-width: 2px;
+    margin: 0px 10px;
 }
 
 .container .articulo h1{
@@ -104,4 +113,17 @@ li{color: white;
 
 .boton-tarea:hover{
     background-color: rgb(48, 38, 43, 1) ;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color:#3f1a2b
+}
+
+a::before{
+    text-decoration: none;
 }
