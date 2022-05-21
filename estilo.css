@@ -101,7 +101,7 @@ li{color: white;
     grid-row: 1;
 }
 
-.boton-tarea{
+.boton-tarea, .boton-tarea-descompletar{
     color: white;
     background-color: rgb(48, 38, 43, 0.5);
     padding: 5px;
@@ -111,7 +111,9 @@ li{color: white;
     grid-row: 1;
 }
 
-.boton-tarea:hover{
+
+
+.boton-tarea:hover, .boton-tarea-descompletar:hover{
     background-color: rgb(48, 38, 43, 1) ;
 }
 

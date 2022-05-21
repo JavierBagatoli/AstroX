@@ -1,4 +1,4 @@
-import Pagina from "./Pagina"
+import {Pagina} from "./Pagina.js"
 //Codigo por Javier Bagatoli, fecha de creacion 18/05/2022
 const numeroDia = new Date().getDay();
 const dias = [
@@ -53,14 +53,6 @@ const persona = [{
 
 },]
 
-let botonAmbitoTrabajo = document.getElementById("botonAmbito")
-
-function abrirEntorno(){ 
-    window.open(persona[idPersona].entorno[0])
-    window.open(persona[idPersona].entorno[1])
-    window.open(persona[idPersona].entorno[2])
-}
-
 //Nav
 const nav = document.querySelector(".estilo-nav")
 
@@ -90,7 +82,7 @@ container.innerHTML += `
         ${tareasPendientes}
     </div>
 </article>
-<button onclick="abrirEntorno()"
+<button 
      id="botonAmbito"
       class="boton-ambito-trabajo">
       🚀Ámbito de trabajo🚀
@@ -103,8 +95,8 @@ container.innerHTML += `
 </article>`
 
 function crearListaTareas(){
-    HTMLResultado = "" 
-    for (tarea in persona[idPersona].tareas){
+    let HTMLResultado = "" 
+    for (let tarea in persona[idPersona].tareas){
         HTMLResultado += `
         <div class="item-tarea">
             <p>
@@ -112,8 +104,7 @@ function crearListaTareas(){
             </p>
             <button 
                     class="boton-tarea"
-                    value="${tarea}"
-                    onClick="concluir(${tarea})">
+                    value="${tarea}">
                 completar
             </button>
         </div>`
@@ -122,17 +113,16 @@ function crearListaTareas(){
 }
 
 function crearListaTareasConcluidas(){
-    HTMLResultado = "" 
-    for (tarea in persona[idPersona].tareasConcluidas){
+    let HTMLResultado = "";
+    for (let tarea in persona[idPersona].tareasConcluidas){
         HTMLResultado += `
         <div class="item-tarea">
             <p>
                 ${persona[idPersona].tareasConcluidas[tarea]}
             </p>
             <button 
-                    class="boton-tarea"
-                    value="${tarea}"
-                    onClick="descompletarTarea(${tarea})">
+                    class="boton-tarea-descompletar"
+                    value="${tarea}">
                 Descompletar
             </button>
         </div>`
@@ -140,37 +130,9 @@ function crearListaTareasConcluidas(){
     return HTMLResultado
 }
 
-const botonTarea = document.querySelector("boton-tarea");
-
-//botonTarea.addEventListener("click",() => alert("click"))
-
-function concluir(valor){
-    let tamTareas = persona[idPersona].tareas[valor];
-    if (tamTareas === undefined){
-        return console.log("Se ha desincronizado el vector")
-    }else{
-        let tareaCompletada = persona[idPersona].tareas[valor];
-        persona[idPersona].tareasConcluidas.push(tareaCompletada)
-        persona[idPersona].tareas.splice(valor,1)
-        actualizarListas();
-    }
-}
-
-function descompletarTarea(valor){
-    let tamTareas = persona[idPersona].tareasConcluidas[valor];
-    if (tamTareas === undefined){
-        return console.log("Se ha desincronizado el vector")
-    }else{
-        let tareaDescompletada = persona[idPersona].tareasConcluidas[valor];
-        persona[idPersona].tareas.push(tareaDescompletada)
-        persona[idPersona].tareasConcluidas.splice(valor,1)
-        actualizarListas();
-    }
-}
-
 function actualizarListas(){
-    tareasPendientes = this.crearListaTareas();
-    tareasConcluidas = this.crearListaTareasConcluidas();
+    tareasPendientes = crearListaTareas();
+    tareasConcluidas = crearListaTareasConcluidas();
 
     container.innerHTML = `
     
@@ -180,7 +142,7 @@ function actualizarListas(){
         ${tareasPendientes}
     </div>
     </article>
-    <button onclick="abrirEntorno()"
+    <button
      id="botonAmbito"
       class="boton-ambito-trabajo">
       🚀Ámbito de trabajo🚀
@@ -191,6 +153,16 @@ function actualizarListas(){
             ${tareasConcluidas}
         </div>
     </article>`
+
+    botonTarea = document.querySelectorAll(".boton-tarea");
+    for(let boton in botonTarea){
+        botonTarea[boton].addEventListener("click", () => concluir(botonTarea[boton].value))
+    }
+
+    botonTareaDescompletar = document.querySelectorAll(".boton-tarea-descompletar");
+    for(let boton in botonTareaDescompletar){
+        botonTareaDescompletar[boton].addEventListener("click", alert("gol"))
+    }
 }
 
 //Cambiar Usuario -> creacion del codigo 19/05/2022
@@ -210,4 +182,52 @@ function cambiarAUsuario(){
 function actualizarDatosUsuario(){
     let perfilNav = document.getElementById("datosPerfil")
     perfilNav.innerHTML = `${persona[idPersona].puesto} ${persona[idPersona].nombre}`
+}
+
+//Funcionalidades
+
+let botonAmbitoTrabajo = document.getElementById("botonAmbito")
+
+
+botonAmbitoTrabajo.addEventListener("click", () => abrirEntorno())
+
+function abrirEntorno() { 
+    window.open(persona[idPersona].entorno[0])
+    window.open(persona[idPersona].entorno[1])
+    window.open(persona[idPersona].entorno[2])
+}
+
+
+let botonTarea = document.querySelectorAll(".boton-tarea");
+for(let boton in botonTarea){
+    botonTarea[boton].addEventListener("click", () => concluir(botonTarea[boton].value))
+}
+
+function concluir(valor){
+    let tamTareas = persona[idPersona].tareas[valor];
+    if (tamTareas === undefined){
+        return console.log("Se ha desincronizado el vector")
+    }else{
+        let tareaCompletada = persona[idPersona].tareas[valor];
+        persona[idPersona].tareasConcluidas.push(tareaCompletada)
+        persona[idPersona].tareas.splice(valor,1)
+        actualizarListas();
+    }
+}
+
+let botonTareaDescompletar = document.querySelector(".boton-tarea-descompletar");
+for(let boton in botonTareaDescompletar){
+    botonTareaDescompletar[boton].addEventListener("click", () => descompletarTarea(botonTareaDescompletar[boton].value))
+}
+
+function descompletarTarea(valor){
+    let tamTareas = persona[idPersona].tareasConcluidas[valor];
+    if (tamTareas === undefined){
+        return console.log("Se ha desincronizado el vector")
+    }else{
+        let tareaDescompletada = persona[idPersona].tareasConcluidas[valor];
+        persona[idPersona].tareas.push(tareaDescompletada)
+        persona[idPersona].tareasConcluidas.splice(valor,1)
+        actualizarListas();
+    }
 }
