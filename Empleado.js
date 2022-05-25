@@ -4,6 +4,7 @@ export class Empleado{
         this.puesto = puesto;
         this.tareas = tareas;
         this.tareasConcluidas = tareasConcluidas;
+        this.entorno = entorno;
     }
 
     get nombre(){

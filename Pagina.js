@@ -1,15 +1,13 @@
 export class Pagina{
-    constructor(nav, cuerpo, persona){
+    constructor(nav){
         this.nav = nav;
-        this.persona = persona;
-        this.cuerpo = cuerpo;
     }
 
-    get nav(){
+    get navbar(){
         return this.nav;
     }
 
-    set nav(nav){
-        this.nav = nav;
+    set navbar(_nav){
+        this.nav = _nav;
     }
 }

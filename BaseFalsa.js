@@ -1,4 +1,4 @@
-const objeto = [{
+export const baseDatos = [{
     nombre : "Javier",
     edad : 22,
     puesto : "ingeniero",
@@ -27,5 +27,4 @@ const objeto = [{
     tareasConcluidas : [
         "Correr"
     ]
-
 },]
