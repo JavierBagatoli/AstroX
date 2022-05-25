@@ -1,5 +1,6 @@
 export const baseDatos = [{
     nombre : "Javier",
+    contrasenia: "123",
     edad : 22,
     puesto : "Ingeniero",
     entorno : [
@@ -16,6 +17,7 @@ export const baseDatos = [{
 
 },{
     nombre : "Paki",
+    contrasenia: "123",
     edad : 21,
     puesto : "Asistente",
     entorno : [

@@ -6,12 +6,15 @@ const persona = baseDatos;
 export class Pagina{
     constructor(cuerpo){
         this.cuerpo = cuerpo;
-        this.idPersona = 0;
-        
+        this.idPersona = -1;
     }
 
     getnavbar(){
         return this.nav;
+    }
+
+    getIdPersona(){
+        return this.idPersona;
     }
 
     setIdPersona(id){
@@ -24,7 +27,6 @@ export class Pagina{
             forma = `
             <div class="grid-item-1">
                 <a href="./index.html"><h1>Inicio</h1></a>
-                <a><h2 id="iniciarSesion">Iniciar Sesion</h2></a>
             </div>`
         }else{
             forma = `
@@ -49,6 +51,145 @@ export class Pagina{
     }
 
     setcuerpo(cuerpo){
-        this.cuerpo = cuerpo;
+        actualizarListas();
+    }
+
+    crearListaTareas(){
+        let HTMLResultado = ""
+            for (let tarea in persona[this.idPersona].tareas){
+                HTMLResultado += `
+                <div class="item-tarea">
+                    <p>
+                        ${persona[this.idPersona].tareas[tarea]}
+                    </p>
+                    <button 
+                            class="boton-tarea"
+                            value="${tarea}">
+                        completar
+                    </button>
+                </div>`;
+            }
+        return HTMLResultado
+    }
+    
+    crearListaTareasConcluidas(){
+        let HTMLResultado = "";
+        for (let tarea in persona[this.idPersona].tareasConcluidas){
+            HTMLResultado += `
+            <div class="item-tarea">
+                <p>
+                    ${persona[this.idPersona].tareasConcluidas[tarea]}
+                </p>
+                <button 
+                        class="boton-eliminar-tarea"
+                        value="${tarea}">
+                    Eliminar
+                </button>
+                <button 
+                        class="boton-tarea-descompletar"
+                        value="${tarea}">
+                    Descompletar
+                </button>
+            </div>`
+        }
+        return HTMLResultado
+    }
+
+    actualizarListas(){
+        if (this.idPersona != -1){
+        let tareasPendientes = this.crearListaTareas();
+        let tareasConcluidas = this.crearListaTareasConcluidas();
+        console.log("lista actualizadas")
+        return  `    
+            <article class="articulo">
+                <h1>Tareas</h1>
+                <div>
+                    ${tareasPendientes}
+                </div>
+            </article>
+            <section style="text-align:center;">
+                <button
+                id="botonAmbito"
+                class="boton-ambito-trabajo">
+                🚀Ámbito de trabajo🚀
+                </button>
+                <article class="articulo art-tarea">
+                    <h1>Agregar Tarea</h1>
+                    <input style="margin-left:25px;" class="input-agregar-tarea" type="text">
+                    <button class="boton-agregar-tarea">Agregar</button>
+                </article>
+            </section>
+            <article class="articulo">
+                <h1>Tareas conlcuidas</h1>
+                <div>
+                    ${tareasConcluidas}
+                </div>
+            </article>`
+        }
+        return `<article></article>
+                <article >
+                    <div class="articulo">
+                        <h1>Iniciar Sesion</h1>
+                        <div class="columna">
+                            <input id="nombre" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
+                            <input id="contrasenia" class="input-agregar-tarea c2" type="password" placeholder="Contraseña">
+                            <button id="boton-iniciar-sesion" class="boton c3">Iniciar sesión</button>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="articulo">
+                        <h1>Registrarse</h1>
+                        <div class="columna">
+                            <input id="nombreRegistro" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
+                            <input id="puestoRegistro" class="input-agregar-tarea c2" type="text" placeholder="Puesto">
+                            <input id="edadeRegistro" class="input-agregar-tarea c3" type="number" placeholder="Edad" min="18" max="80">
+                            <input id="contraseniaRegistro" class="input-agregar-tarea c4" type="password" placeholder="Contraseña">
+                            <input id="contraseniaRepetidaRegistro" class="input-agregar-tarea c5" type="password" placeholder="Repita la contraseña">
+                            <button id="boton-registrar" class="boton c6">Agregar</button>
+                        </div>
+                    </div>
+            </article>`
+    }
+
+    concluir(valor){
+        let tamTareas = persona[this.idPersona].tareas[valor];
+        if (tamTareas === undefined){
+            return console.log("Se ha desincronizado el vector")
+        }else{
+            let tareaCompletada = persona[this.idPersona].tareas[valor];
+            persona[this.idPersona].tareasConcluidas.push(tareaCompletada)
+            persona[this.idPersona].tareas.splice(valor,1)
+            return this.actualizarListas();
+        }
+    }
+    
+    
+    descompletarTarea(valor){
+        let tamTareas = persona[this.idPersona].tareasConcluidas[valor];
+        if (tamTareas === undefined){
+            return console.log("Se ha desincronizado el vector")
+        }else{
+            let tareaDescompletada = persona[this.idPersona].tareasConcluidas[valor];
+            persona[this.idPersona].tareas.push(tareaDescompletada)
+            persona[this.idPersona].tareasConcluidas.splice(valor,1)
+            return this.actualizarListas();
+        }
+    }
+
+    abrirEntorno() { 
+        let entornos = persona[this.idPersona].entorno
+        for (let index in entornos){
+        window.open(entornos[index])
+        }
+    }
+
+    agregarTarea(tarea){
+        persona[this.idPersona].tareas.push(tarea)
+        return this.actualizarListas();
+    }
+
+    eliminarTarea(tarea){
+        persona[this.idPersona].tareasConcluidas.splice(tarea,1)
+        return this.actualizarListas();
     }
 }

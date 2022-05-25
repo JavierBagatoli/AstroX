@@ -80,6 +80,39 @@ li{color: white;
     border-color: white;
     border-width: 2px;
     margin: 0px 10px;
+    
+}
+
+.columna{
+    display: grid;
+    grid-template-rows: 6;
+}
+.columna .c1,.columna .c2,.columna .c3,.columna .c4,.columna .c5,.columna .c6{
+    margin: 20px;
+    margin-top: 0px;
+    grid-column: 1;
+}
+.columna .c1{
+    grid-row: 1;
+}
+.columna .c2{
+    grid-row: 2;
+}
+.columna .c3{
+    grid-row: 3;
+}
+.columna .c4{
+    grid-row: 4;
+}
+.columna .c5{
+    grid-row: 5;
+}
+
+.columna .c6{
+    grid-row: 6;
+}
+.container .articulo section article{
+    width: 200px;
 }
 
 .container .articulo h1{
@@ -102,7 +135,7 @@ li{color: white;
     grid-row: 1;
 }
 
-.boton-tarea, .boton-tarea-descompletar{
+.boton-tarea, .boton-tarea-descompletar, .input-agregar-tarea, .boton-agregar-tarea, .boton{
     color: white;
     background-color: rgb(48, 38, 43, 0.5);
     padding: 5px;
@@ -111,10 +144,28 @@ li{color: white;
     grid-column: 3;
     grid-row: 1;
 }
+.boton-eliminar-tarea{
+    color: white;
+    background-color: rgb(48, 38, 43, 0.5);
+    padding: 5px;
+    border-radius: 15px;
+    border-style:solid;
+    grid-column: 2;
+    grid-row: 1;
+}
+.input-agregar-tarea{
+   margin-bottom: 10px; 
+}
 
+input::placeholder{
+    color: white;
+}
 
+button{
+    margin: 10px;
+}
 
-.boton-tarea:hover, .boton-tarea-descompletar:hover{
+.boton-tarea:hover, .boton-tarea-descompletar:hover, .boton-agregar-tarea:hover, .boton:hover,.boton-eliminar-tarea:hover{
     background-color: rgb(48, 38, 43, 1) ;
 }
 
