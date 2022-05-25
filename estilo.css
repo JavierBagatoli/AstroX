@@ -25,6 +25,7 @@ body{
     margin-right: 5%;
     grid-column: 3;
     grid-row: 1;
+    user-select: none;
 }
 .estilo-nav .grid-item-1{
     text-align: left;
@@ -120,12 +121,13 @@ li{color: white;
 a{
     color: white;
     text-decoration: none;
+    user-select: none;
 }
 
 a:hover{
-    color:#3f1a2b
+    color:#3f1a2b;
 }
 
-a::before{
+a:before{
     text-decoration: none;
 }

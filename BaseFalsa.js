@@ -1,7 +1,7 @@
 export const baseDatos = [{
     nombre : "Javier",
     edad : 22,
-    puesto : "ingeniero",
+    puesto : "Ingeniero",
     entorno : [
         "https://calendar.google.com/calendar/u/0/r",
         "http://localhost:8080/api/v1/Empleados",
