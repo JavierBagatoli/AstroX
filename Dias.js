@@ -17,7 +17,7 @@ function diaTexto(){
 }
 
 function colorTexto(){
-    if (numeroDia == 6 || numeroDia == 7){
+    if (numeroDia == 6 || numeroDia == 0){
         tituloDia.classList.add("diaNoLaboral")
     }
 }

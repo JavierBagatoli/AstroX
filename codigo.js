@@ -7,7 +7,7 @@ import {Pagina} from "./Pagina.js"
 //Objetos
 var pagina;
 if (pagina == null){
-    pagina = new Pagina("")
+    pagina = new Pagina()
 }
 
 //Nav
@@ -137,7 +137,7 @@ function iniciarSesion(nombre, contrasenia){
             }
         }
     }else{
-        retroalimentacion("El nombre no es valido, solo se adminten letras y espacios.")
+        retroalimentacion("El nombre no es válido, solo se admiten letras y espacios.")
     }
 }
 
@@ -166,13 +166,13 @@ function registrarEmpleado(nombre,puesto,edad,contrasenia,contraseniaRepetida){
                     retroalimentacionRegistro("Las contraseñas no coinciden.");
                 }
             }else{
-                retroalimentacionRegistro("La edad debe estar entre los limites de 18 a 80 años.");
+                retroalimentacionRegistro("La edad debe estar entre los límites de 18 a 80 años.");
             }
         }else{
-            retroalimentacionRegistro("El puesto no es valido, solo se adminten letras y espacios.")
+            retroalimentacionRegistro("El puesto no es válido, solo se admiten letras y espacios.")
         }
     }else{
-        retroalimentacionRegistro("El nombre no es valido, solo se adminten letras y espacios.")
+        retroalimentacionRegistro("El nombre no es válido, solo se admiten letras y espacios.")
     }
 }
 

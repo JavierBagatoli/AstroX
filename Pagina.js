@@ -5,8 +5,7 @@ const persona = baseDatos;
 
 
 export class Pagina{
-    constructor(cuerpo){
-        this.cuerpo = cuerpo;
+    constructor(){
         this.idPersona = -1;
     }
 
@@ -45,14 +44,6 @@ export class Pagina{
                 `;
         }
         return forma;
-    }
-
-    getcuerpo(){
-        return this.cuerpo;
-    }
-
-    setcuerpo(cuerpo){
-        actualizarListas();
     }
 
     crearListaTareas(){
