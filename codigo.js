@@ -5,7 +5,10 @@ import {baseDatos} from "./BaseFalsa.js"
 import {Pagina} from "./Pagina.js"
 
 //Objetos
-const pagina = new Pagina("")
+var pagina;
+if (pagina == null){
+    pagina = new Pagina("")
+}
 
 //Nav
 const nav = document.querySelector(".estilo-nav");
