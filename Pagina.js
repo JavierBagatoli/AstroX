@@ -1,3 +1,4 @@
+//Codigo desarrollado por Javier Bagatoli desde el 21/05/2022 al 26/05/2022
 import {baseDatos} from "./BaseFalsa.js"
 
 const persona = baseDatos;
@@ -26,13 +27,13 @@ export class Pagina{
         if (this.idPersona == -1){
             forma = `
             <div class="grid-item-1">
-                <a href="./index.html"><h1>Inicio</h1></a>
+                <h1>AstroX</h1>
             </div>`
         }else{
             forma = `
                 <div class="grid-item-1">
-                    <a href="./index.html"><h1>Inicio</h1></a>
-                    <a><h2 id="cambiarUsuario">Cambiar usuario</h2></a>
+                    <h1>AstroX</h1>
+                    <a><h2 id="cerrarSesion">Cerrar sesión</h2></a>
                 </div>
                 <div class="grid-item-usuario">
                     <ul >
@@ -99,7 +100,6 @@ export class Pagina{
         if (this.idPersona != -1){
         let tareasPendientes = this.crearListaTareas();
         let tareasConcluidas = this.crearListaTareasConcluidas();
-        console.log("lista actualizadas")
         return  `    
             <article class="articulo">
                 <h1>Tareas</h1>
@@ -134,6 +134,7 @@ export class Pagina{
                             <input id="nombre" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
                             <input id="contrasenia" class="input-agregar-tarea c2" type="password" placeholder="Contraseña">
                             <button id="boton-iniciar-sesion" class="boton c3">Iniciar sesión</button>
+                            <p id="retroalimentacionInicioSesion" class="c4"></>
                         </div>
                     </div>
                     <br/>
@@ -146,6 +147,7 @@ export class Pagina{
                             <input id="contraseniaRegistro" class="input-agregar-tarea c4" type="password" placeholder="Contraseña">
                             <input id="contraseniaRepetidaRegistro" class="input-agregar-tarea c5" type="password" placeholder="Repita la contraseña">
                             <button id="boton-registrar" class="boton c6">Agregar</button>
+                            <p id="retroalimentacionInicioRegistro" class="c7"></>
                         </div>
                     </div>
             </article>`

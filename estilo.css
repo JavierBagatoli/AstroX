@@ -36,7 +36,8 @@ body{
     grid-auto-rows: 60px;
 }
 
-li{color: white;
+li{
+    color: white;
     list-style-type: none;
 }
 
@@ -55,9 +56,11 @@ li{color: white;
     width: 350px;
     height: 150px;
 }
+
 .boton-ambito-trabajo:hover{
     background-color: #b24944;
 }
+
 .diaNoLaboral{
     color: rgb(224, 96, 96);
 }
@@ -85,9 +88,10 @@ li{color: white;
 
 .columna{
     display: grid;
-    grid-template-rows: 6;
+    grid-template-rows: 7;
 }
-.columna .c1,.columna .c2,.columna .c3,.columna .c4,.columna .c5,.columna .c6{
+
+.columna .c1,.columna .c2,.columna .c3,.columna .c4,.columna .c5,.columna .c6,.columna .c7{
     margin: 20px;
     margin-top: 0px;
     grid-column: 1;
@@ -110,6 +114,9 @@ li{color: white;
 
 .columna .c6{
     grid-row: 6;
+}
+.columna .c7{
+    grid-row: 7;
 }
 .container .articulo section article{
     width: 200px;
@@ -144,6 +151,7 @@ li{color: white;
     grid-column: 3;
     grid-row: 1;
 }
+
 .boton-eliminar-tarea{
     color: white;
     background-color: rgb(48, 38, 43, 0.5);
@@ -153,6 +161,7 @@ li{color: white;
     grid-column: 2;
     grid-row: 1;
 }
+
 .input-agregar-tarea{
    margin-bottom: 10px; 
 }
@@ -181,4 +190,12 @@ a:hover{
 
 a:before{
     text-decoration: none;
+}
+
+.rojo{
+    background-color: rgba(134, 16, 16, 0.7);
+    padding: 5px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #3f1a2b;
 }

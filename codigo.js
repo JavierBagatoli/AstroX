@@ -1,13 +1,12 @@
+//Codigo desarrollado por Javier Bagatoli desde el 21/05/2022 al 26/05/2022
+
 import {setDiaTitulo} from "./Dias.js"
 import {baseDatos} from "./BaseFalsa.js"
 import {Pagina} from "./Pagina.js"
-//Codigo por Javier Bagatoli, fecha de creacion 21/05/2022
-
-setDiaTitulo();
 
 //Objetos
-const persona = baseDatos;
 const pagina = new Pagina("")
+
 //Nav
 const nav = document.querySelector(".estilo-nav");
 nav.innerHTML = pagina.setnavbar();
@@ -17,29 +16,28 @@ var ListaBotonTarea = document.querySelectorAll(".boton-tarea");
 var ListaBotonTareaDescompletar = document.querySelectorAll(".boton-tarea-descompletar");
 var ListaBotonEliminar = document.querySelectorAll(".boton-eliminar-tarea");
 
-let cambiarUsuario
+let cerrarUsuario
 let botonAgregarTarea;
 let inputAgregarTarea;
+let botonAmbitoTrabajo
+
 //Cambiar Usuario -> creacion del codigo 19/05/2022
 function defCambiarUsuario(){
     if (pagina.getIdPersona() != -1){
-        cambiarUsuario = document.getElementById("cambiarUsuario")
-        cambiarUsuario.addEventListener("click", () => cambiarAUsuario())
+        cerrarUsuario = document.getElementById("cerrarSesion")
+        cerrarUsuario.addEventListener("click", () => cerrarSesion())
+        botonAmbitoTrabajo = document.getElementById("botonAmbito")
+        botonAmbitoTrabajo.addEventListener("click", () => pagina.abrirEntorno())
     }
 }
-defCambiarUsuario();
 
 
-function cambiarAUsuario(){
+function cerrarSesion(){
     if (pagina.getIdPersona() != -1){
         nav.innerHTML = pagina.setIdPersona(-1)
-    }else{
-        nav.innerHTML = pagina.setIdPersona(0)
     }
     pagina.setnavbar();
-    defCambiarUsuario();
-    container.innerHTML = pagina.actualizarListas()
-    defBotonesAcciones();
+    actualizarPagina();
 }
 
 //Funcionalidades
@@ -58,8 +56,9 @@ function defBotonesAcciones(){
             })
         }
     }
-
+   
     for(let boton in ListaBotonTareaDescompletar){
+
         if (boton <= ListaBotonTareaDescompletar.length-1){
             ListaBotonTareaDescompletar[boton].addEventListener("click", () => {
                 container.innerHTML = pagina.descompletarTarea(ListaBotonTareaDescompletar[boton].value)
@@ -78,14 +77,6 @@ function defBotonesAcciones(){
     }
     defBotonAgregar();
 }
-defBotonesAcciones();
-
-let botonAmbitoTrabajo = document.getElementById("botonAmbito")
-if (botonAmbitoTrabajo !== null){
-    botonAmbitoTrabajo.addEventListener("click", () => pagina.abrirEntorno())
-}else{
-    console.log("no existe el boton actualmente")
-}
 
 function defBotonAgregar(){
     if (pagina.getIdPersona() != -1){
@@ -94,15 +85,15 @@ function defBotonAgregar(){
         botonAgregarTarea.addEventListener("click", () => {
             if (entradaValida(inputAgregarTarea.value) ){
                 pagina.agregarTarea(inputAgregarTarea.value);
-                container.innerHTML = pagina.actualizarListas();
+                actualizarPagina()
                 inputAgregarTarea.value = "";
-                defBotonesAcciones();
             }
         })
     }else{
         let botonIniciarSesion = document.getElementById('boton-iniciar-sesion')
         let inputNombre = document.getElementById('nombre')
         let inputContrasenia = document.getElementById('contrasenia')
+
         botonIniciarSesion.addEventListener("click", () => iniciarSesion(inputNombre.value, inputContrasenia.value))
 
         let botonRegistrar = document.getElementById('boton-registrar')
@@ -111,6 +102,7 @@ function defBotonAgregar(){
         let inputEdadRegistrar = document.getElementById('edadeRegistro')
         let inputContraseniaRegistrar = document.getElementById('contraseniaRegistro')
         let inputContraseniaRepetidaRegistrar = document.getElementById('contraseniaRepetidaRegistro')
+
         botonRegistrar.addEventListener("click", () => registrarEmpleado(
             inputNombreRegistrar.value,
             inputPuestoRegistrar.value,
@@ -120,41 +112,64 @@ function defBotonAgregar(){
     }
 }
 
+function retroalimentacion(texto){
+    retroalimentacionInicioSesion.classList.add("rojo")
+    retroalimentacionInicioSesion.innerHTML = texto;
+}
+
 function iniciarSesion(nombre, contrasenia){
     if (entradaValida(nombre)){
         for (let empleado in baseDatos){
             if (baseDatos[empleado].nombre == nombre){
                 if (baseDatos[empleado].contrasenia == contrasenia){
                     nav.innerHTML = pagina.setIdPersona(empleado);
-                    container.innerHTML = pagina.actualizarListas();
-                    defBotonesAcciones();
-                    defCambiarUsuario();
+                    actualizarPagina()
+                    
+                }else{
+                    retroalimentacion("Contraseña invalida.");
                 }
+                break;
+            }else{
+                retroalimentacion("El empleado no existe.")
             }
         }
+    }else{
+        retroalimentacion("El nombre no es valido, solo se adminten letras y espacios.")
     }
+}
+
+function retroalimentacionRegistro(texto){
+    retroalimentacionInicioRegistro.classList.add("rojo")
+    retroalimentacionInicioRegistro.innerHTML = texto;
 }
 
 function registrarEmpleado(nombre,puesto,edad,contrasenia,contraseniaRepetida){
     if (entradaValida(nombre)){
         if (entradaValida(puesto)){
-            if(contrasenia == contraseniaRepetida){
-                baseDatos.push({
-                    nombre : nombre,
-                    contrasenia: contrasenia,
-                    edad : edad,
-                    puesto : puesto,
-                    entorno : [],
-                    tareas : [],
-                    tareasConcluidas : []
-                })
-                nav.innerHTML = pagina.setIdPersona(baseDatos.length-1);
-                container.innerHTML = pagina.actualizarListas();
-                defBotonesAcciones();
-                defCambiarUsuario();
-                console.log(baseDatos)
+            if (edad >= 18 && edad <= 80){
+                if(contrasenia == contraseniaRepetida){
+                    baseDatos.push({
+                        nombre : nombre,
+                        contrasenia: contrasenia,
+                        edad : edad,
+                        puesto : puesto,
+                        entorno : [],
+                        tareas : [],
+                        tareasConcluidas : []
+                    })
+                    nav.innerHTML = pagina.setIdPersona(baseDatos.length-1);
+                    actualizarPagina()
+                }else{
+                    retroalimentacionRegistro("Las contraseñas no coinciden.");
+                }
+            }else{
+                retroalimentacionRegistro("La edad debe estar entre los limites de 18 a 80 años.");
             }
+        }else{
+            retroalimentacionRegistro("El puesto no es valido, solo se adminten letras y espacios.")
         }
+    }else{
+        retroalimentacionRegistro("El nombre no es valido, solo se adminten letras y espacios.")
     }
 }
 
@@ -173,4 +188,16 @@ function entradaValida(entrada){
 
 function noEsLetra(caracter){
     return ((caracter <= 64 || caracter >= 91) && (caracter <= 96 || caracter >= 123) && (caracter != 32))
+}
+
+function actualizarPagina(){
+    container.innerHTML = pagina.actualizarListas();
+    defBotonesAcciones();
+    defCambiarUsuario();
+}
+
+export function iniciar(){
+    setDiaTitulo();
+    defCambiarUsuario();
+    defBotonesAcciones();
 }
