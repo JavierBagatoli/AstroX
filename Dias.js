@@ -1,6 +1,7 @@
 //Codigo por Javier Bagatol, 21/05/2022
 const tituloDia = document.querySelector(".titulo-dia")
 const numeroDia = new Date().getDay();
+const numDia = new Date().getDate();
 const dias = [
     'Domingo',
     'Lunes',
@@ -13,7 +14,7 @@ const dias = [
 
 
 function diaTexto(){
-    tituloDia.innerHTML = `${dias[numeroDia]}`
+    tituloDia.innerHTML = `${dias[numeroDia]} ${numDia}`
 }
 
 function colorTexto(){

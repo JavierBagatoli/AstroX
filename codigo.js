@@ -1,5 +1,4 @@
 //Codigo desarrollado por Javier Bagatoli desde el 21/05/2022 al 26/05/2022
-
 import {setDiaTitulo} from "./Dias.js"
 import {baseDatos} from "./BaseFalsa.js"
 import {Pagina} from "./Pagina.js"

@@ -2,6 +2,7 @@ body{
     background-image: url("https://images5.alphacoders.com/102/1029478.jpg");
     background-size: cover;
     color: white;
+    size: 13;
     border : 0px;
     margin : 0px;
     font-family: sans-serif;
@@ -18,6 +19,9 @@ body{
 
 .estilo-nav h1{
     margin-left: 10px;
+}
+h2{
+    color: white;
 }
 
 .estilo-nav .grid-item-usuario{
@@ -67,6 +71,7 @@ li{
 
 .titulo-dia{
     text-align: center;
+    font-size: 36px;
 }
 
 .container{
@@ -165,13 +170,25 @@ li{
 .input-agregar-tarea{
    margin-bottom: 10px; 
 }
+input{
+    padding-top: 6px;
+    font-size:16px;
+}
 
 input::placeholder{
     color: white;
+    font-size:16px;
 }
 
 button{
     margin: 10px;
+    font-size: 16px;
+}
+
+.boton-centrar{
+    justify-self: center;
+    font-size: 26px;
+    width: 300px;
 }
 
 .boton-tarea:hover, .boton-tarea-descompletar:hover, .boton-agregar-tarea:hover, .boton:hover,.boton-eliminar-tarea:hover{
@@ -198,4 +215,14 @@ a:before{
     border-radius: 15px;
     border-style: solid;
     border-color: #3f1a2b;
+}
+a h2:hover{
+    color:#3f1a2b;
+}
+h1{
+    font-size: 26px;
+}
+
+p{
+    font-size: 22px;
 }

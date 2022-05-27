@@ -13,6 +13,9 @@ export class Pagina{
         return this.nav;
     }
 
+    set nav(nav){
+        this.nav = nav
+    }
     getIdPersona(){
         return this.idPersona;
     }
@@ -32,14 +35,10 @@ export class Pagina{
             forma = `
                 <div class="grid-item-1">
                     <h1>AstroX</h1>
-                    <a><h2 id="cerrarSesion">Cerrar sesión</h2></a>
+                    <h2 id="datosPerfil">${persona[this.idPersona].puesto} ${persona[this.idPersona].nombre}</h2>
                 </div>
                 <div class="grid-item-usuario">
-                    <ul >
-                        <li>
-                            <h3 id="datosPerfil">${persona[this.idPersona].puesto} ${persona[this.idPersona].nombre}</h3>
-                        </li>
-                    </ul>
+                    <a><h2 id="cerrarSesion">Cerrar sesión</h2></a>
                 </div>
                 `;
         }
@@ -57,7 +56,7 @@ export class Pagina{
                     <button 
                             class="boton-tarea"
                             value="${tarea}">
-                        completar
+                        Completar
                     </button>
                 </div>`;
             }
@@ -106,12 +105,12 @@ export class Pagina{
                 </button>
                 <article class="articulo art-tarea">
                     <h1>Agregar Tarea</h1>
-                    <input style="margin-left:25px;" class="input-agregar-tarea" type="text">
+                    <input style="margin-left:25px;" class="input-agregar-tarea" type="text" maxlength="30">
                     <button class="boton-agregar-tarea">Agregar</button>
                 </article>
             </section>
             <article class="articulo">
-                <h1>Tareas conlcuidas</h1>
+                <h1>Tareas concluidas</h1>
                 <div>
                     ${tareasConcluidas}
                 </div>
@@ -120,11 +119,11 @@ export class Pagina{
         return `<article></article>
                 <article >
                     <div class="articulo">
-                        <h1>Iniciar Sesion</h1>
+                        <h1>Iniciar Sesión</h1>
                         <div class="columna">
                             <input id="nombre" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
                             <input id="contrasenia" class="input-agregar-tarea c2" type="password" placeholder="Contraseña">
-                            <button id="boton-iniciar-sesion" class="boton c3">Iniciar sesión</button>
+                            <button id="boton-iniciar-sesion" class="boton c3 boton-centrar">Iniciar sesión</button>
                             <p id="retroalimentacionInicioSesion" class="c4"></>
                         </div>
                     </div>
@@ -137,7 +136,7 @@ export class Pagina{
                             <input id="edadeRegistro" class="input-agregar-tarea c3" type="number" placeholder="Edad" min="18" max="80">
                             <input id="contraseniaRegistro" class="input-agregar-tarea c4" type="password" placeholder="Contraseña">
                             <input id="contraseniaRepetidaRegistro" class="input-agregar-tarea c5" type="password" placeholder="Repita la contraseña">
-                            <button id="boton-registrar" class="boton c6">Agregar</button>
+                            <button id="boton-registrar" class="boton c6 boton-centrar">Agregar</button>
                             <p id="retroalimentacionInicioRegistro" class="c7"></>
                         </div>
                     </div>
