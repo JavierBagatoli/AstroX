@@ -13,9 +13,6 @@ export class Pagina{
         return this.nav;
     }
 
-    set nav(nav){
-        this.nav = nav
-    }
     getIdPersona(){
         return this.idPersona;
     }
@@ -29,7 +26,6 @@ export class Pagina{
         if (this.idPersona == -1){
             forma = `
             <div class="grid-item-1">
-                <h1>AstroX</h1>
             </div>`
         }else{
             forma = `
@@ -55,7 +51,8 @@ export class Pagina{
                     </p>
                     <button 
                             class="boton-tarea"
-                            value="${tarea}">
+                            value="${tarea}"
+                            title="Completará la tarea">
                         Completar
                     </button>
                 </div>`;
@@ -73,12 +70,14 @@ export class Pagina{
                 </p>
                 <button 
                         class="boton-eliminar-tarea"
-                        value="${tarea}">
+                        value="${tarea}"
+                        title="Elimina la tarea de permanentemente">
                     Eliminar
                 </button>
                 <button 
                         class="boton-tarea-descompletar"
-                        value="${tarea}">
+                        value="${tarea}"
+                        title="Mueve la tarea a la lista de tareas incompletas">
                     Descompletar
                 </button>
             </div>`
@@ -103,10 +102,12 @@ export class Pagina{
                 class="boton-ambito-trabajo">
                 🚀Ámbito de trabajo🚀
                 </button>
-                <article class="articulo art-tarea">
-                    <h1>Agregar Tarea</h1>
-                    <input style="margin-left:25px;" class="input-agregar-tarea" type="text" maxlength="30">
-                    <button class="boton-agregar-tarea">Agregar</button>
+                <article class="articulo art-tarea columna">
+                    <h1 class="c1">Agregar Tarea</h1>
+                    <input style="margin-left:25px;" class="input-agregar-tarea c2" type="text" maxlength="30">
+                    <label class="c3">Fecha finalizacion</label>
+                    <input id="fechaFinalizacionTarea" class="c4 input-agregar-tarea" type="date">
+                    <button class="c5 boton-agregar-tarea" title="Agrega una tarea a la lista 'Tareas'">Agregar</button>
                 </article>
             </section>
             <article class="articulo">
@@ -116,19 +117,8 @@ export class Pagina{
                 </div>
             </article>`
         }
-        return `<article></article>
-                <article >
-                    <div class="articulo">
-                        <h1>Iniciar Sesión</h1>
-                        <div class="columna">
-                            <input id="nombre" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
-                            <input id="contrasenia" class="input-agregar-tarea c2" type="password" placeholder="Contraseña">
-                            <button id="boton-iniciar-sesion" class="boton c3 boton-centrar">Iniciar sesión</button>
-                            <p id="retroalimentacionInicioSesion" class="c4"></>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="articulo">
+        return `<article>
+                    <div class="articulo login">
                         <h1>Registrarse</h1>
                         <div class="columna">
                             <input id="nombreRegistro" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
@@ -140,7 +130,22 @@ export class Pagina{
                             <p id="retroalimentacionInicioRegistro" class="c7"></>
                         </div>
                     </div>
-            </article>`
+                </article>
+
+                <article>
+                </article>
+                
+                <article>
+                    <div class="articulo login">
+                        <h1>Iniciar Sesión</h1>
+                        <div class="columna">
+                            <input id="nombre" class="input-agregar-tarea c1" type="text" placeholder="Nombre">
+                            <input id="contrasenia" class="input-agregar-tarea c2" type="password" placeholder="Contraseña">
+                            <button id="boton-iniciar-sesion" class="boton c3 boton-centrar">Iniciar sesión</button>
+                            <p id="retroalimentacionInicioSesion" class="c4"></>
+                        </div>
+                    </div>
+                </article>`
     }
 
     concluir(valor){
@@ -175,8 +180,13 @@ export class Pagina{
         }
     }
 
-    agregarTarea(tarea){
-        persona[this.idPersona].tareas.push(tarea)
+    agregarTarea(tarea,fechaFinalizacion){
+        let tareaAgregar = {
+            nombre: tarea,
+            fechaFinalizacion : fechaFinalizacion
+        }
+        console.log(tareaAgregar)
+        persona[this.idPersona].tareas.push(tareaAgregar)
         return this.actualizarListas();
     }
 

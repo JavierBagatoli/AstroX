@@ -26,6 +26,7 @@ let botonAmbitoTrabajo
 //Cambiar Usuario -> creacion del codigo 19/05/2022
 function defCambiarUsuario(){
     if (pagina.getIdPersona() != -1){
+        setDiaTitulo();
         cerrarUsuario = document.getElementById("cerrarSesion")
         cerrarUsuario.addEventListener("click", () => cerrarSesion())
         botonAmbitoTrabajo = document.getElementById("botonAmbito")
@@ -86,7 +87,7 @@ function defBotonAgregar(){
         botonAgregarTarea = document.querySelector(".boton-agregar-tarea")
         botonAgregarTarea.addEventListener("click", () => {
             if (entradaValida(inputAgregarTarea.value) ){
-                pagina.agregarTarea(inputAgregarTarea.value);
+                pagina.agregarTarea(inputAgregarTarea.value,fechaFinalizacionTarea.value);
                 actualizarPagina()
                 inputAgregarTarea.value = "";
             }
@@ -149,20 +150,25 @@ function registrarEmpleado(nombre,puesto,edad,contrasenia,contraseniaRepetida){
     if (entradaValida(nombre)){
         if (entradaValida(puesto)){
             if (edad >= 18 && edad <= 80){
-                if(contrasenia == contraseniaRepetida){
-                    baseDatos.push({
-                        nombre : nombre,
-                        contrasenia: contrasenia,
-                        edad : edad,
-                        puesto : puesto,
-                        entorno : [],
-                        tareas : [],
-                        tareasConcluidas : []
-                    })
-                    nav.innerHTML = pagina.setIdPersona(baseDatos.length-1);
-                    actualizarPagina()
+                    alert("hola")
+                if (contrasenia.length > 8 && contrasenia.length < 20){
+                    if(contrasenia == contraseniaRepetida){
+                        baseDatos.push({
+                            nombre : nombre,
+                            contrasenia: contrasenia,
+                            edad : edad,
+                            puesto : puesto,
+                            entorno : [],
+                            tareas : [],
+                            tareasConcluidas : []
+                        })
+                        nav.innerHTML = pagina.setIdPersona(baseDatos.length-1);
+                        actualizarPagina()
+                    }else{
+                        retroalimentacionRegistro("Las contraseñas no coinciden.");
+                    }
                 }else{
-                    retroalimentacionRegistro("Las contraseñas no coinciden.");
+                    retroalimentacionRegistro("La contraseña debe tener al menos 8 caracteres y menos de 20 caracteres");
                 }
             }else{
                 retroalimentacionRegistro("La edad debe estar entre los límites de 18 a 80 años.");
@@ -199,7 +205,6 @@ function actualizarPagina(){
 }
 
 export function iniciar(){
-    setDiaTitulo();
     defCambiarUsuario();
     defBotonesAcciones();
 }

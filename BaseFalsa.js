@@ -7,7 +7,7 @@ export const baseDatos = [{
     entorno : [
         "https://calendar.google.com/calendar/u/0/r",
         "http://localhost:8080/api/v1/Empleados",
-        "https://www.youtube.com/watch?v=xOinGb2MZSk&t=24137s"
+        //"https://www.youtube.com/watch?v=xOinGb2MZSk&t=24137s"
     ],
     tareas : [
         "Caminar", "Probar cohetes", "Verificar combustible", "Trazar orbita"
