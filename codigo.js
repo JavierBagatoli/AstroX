@@ -150,8 +150,7 @@ function registrarEmpleado(nombre,puesto,edad,contrasenia,contraseniaRepetida){
     if (entradaValida(nombre)){
         if (entradaValida(puesto)){
             if (edad >= 18 && edad <= 80){
-                    alert("hola")
-                if (contrasenia.length > 8 && contrasenia.length < 20){
+                if (contrasenia.length >= 8 && contrasenia.length < 20){
                     if(contrasenia == contraseniaRepetida){
                         baseDatos.push({
                             nombre : nombre,
