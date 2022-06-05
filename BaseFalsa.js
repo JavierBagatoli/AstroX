@@ -10,7 +10,10 @@ export const baseDatos = [{
         //"https://www.youtube.com/watch?v=xOinGb2MZSk&t=24137s"
     ],
     tareas : [
-        "Caminar", "Probar cohetes", "Verificar combustible", "Trazar orbita"
+        {nombre : "Caminar", fechaFinalizacion: ""},
+        {nombre : "Probar cohetes", fechaFinalizacion: ""},
+        {nombre : "Verificar combustible", fechaFinalizacion: ""},
+        {nombre : "Trazar orbita", fechaFinalizacion: ""},
     ],
     tareasConcluidas : [
         "Respirar"

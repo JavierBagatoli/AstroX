@@ -1,5 +1,6 @@
 //Codigo desarrollado por Javier Bagatoli desde el 21/05/2022 al 26/05/2022
 import {baseDatos} from "./BaseFalsa.js"
+import {dias, meses} from "./Dias.js"
 
 const persona = baseDatos;
 
@@ -42,12 +43,15 @@ export class Pagina{
     }
 
     crearListaTareas(){
-        let HTMLResultado = ""
-            for (let tarea in persona[this.idPersona].tareas){
+        let HTMLResultado = "";
+        let listaTareaPersona = persona[this.idPersona].tareas;
+            for (let tarea in listaTareaPersona){
+                let tareaObjeto =listaTareaPersona[tarea];
+                let fechaFin = this.fechaFormato(tareaObjeto.fechaFinalizacion);
                 HTMLResultado += `
                 <div class="item-tarea">
-                    <p>
-                        ${persona[this.idPersona].tareas[tarea]}
+                    <p title="Fecha maxima para finalizar ${fechaFin}">
+                        ${tareaObjeto.nombre}
                     </p>
                     <button 
                             class="boton-tarea"
@@ -59,7 +63,16 @@ export class Pagina{
             }
         return HTMLResultado
     }
-    
+
+    fechaFormato(fechaBruta) {
+        if (fechaBruta == null || fechaBruta ===""){
+            return "no tiene límite temporal"
+        }else{
+            let fechaObjeto = new Date(fechaBruta)
+            return `${dias[fechaObjeto.getDay()]} ${fechaObjeto.getDate()} de ${meses[fechaObjeto.getMonth()]}`
+        }
+    }
+
     crearListaTareasConcluidas(){
         let HTMLResultado = "";
         for (let tarea in persona[this.idPersona].tareasConcluidas){
@@ -100,7 +113,7 @@ export class Pagina{
                 <button
                 id="botonAmbito"
                 class="boton-ambito-trabajo">
-                🚀Ámbito de trabajo🚀
+                Ámbito laboral
                 </button>
                 <article class="articulo art-tarea columna">
                     <h1 class="c1">Agregar Tarea</h1>
@@ -127,7 +140,7 @@ export class Pagina{
                             <input id="contraseniaRegistro" class="input-agregar-tarea c4" type="password" placeholder="Contraseña">
                             <input id="contraseniaRepetidaRegistro" class="input-agregar-tarea c5" type="password" placeholder="Repita la contraseña">
                             <button id="boton-registrar" class="boton c6 boton-centrar">Agregar</button>
-                            <p id="retroalimentacionInicioRegistro" class="c7"></>
+                            <p id="retroalimentacionInicioRegistro" class="c7"></p>
                         </div>
                     </div>
                 </article>
